@@ -12,7 +12,7 @@ interface MnaMicroservicesProps {
 
 export class MnaMicroservices extends Construct {
     // expose the lambda function
-    private readonly discussionMicroservice: NodejsFunction;
+    public readonly discussionMicroservice: NodejsFunction;
 
 
     constructor(scope: Construct, id: string, props?: MnaMicroservicesProps) {
@@ -22,7 +22,8 @@ export class MnaMicroservices extends Construct {
         this.discussionMicroservice = this.createDiscussionFunction();
 
     }
-    createDiscussionFunction(): NodejsFunction {
+
+    private createDiscussionFunction(): NodejsFunction {
         const nodeJsFunctionProps: NodejsFunctionProps = {
             entry: path.join(__dirname, '../src/discussion/index.ts'),
             handler: 'handler',

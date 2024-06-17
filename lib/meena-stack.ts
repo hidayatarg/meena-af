@@ -1,6 +1,7 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { MnaMicroservices } from './microservices';
+import { MnaApiGateway } from './MnaApiGateway';
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
 
 export class MeenaStack extends cdk.Stack {
@@ -13,8 +14,12 @@ export class MeenaStack extends cdk.Stack {
     // const queue = new sqs.Queue(this, 'MeenaQueue', {
     //   visibilityTimeout: cdk.Duration.seconds(300)
     // });
-    const microservices = new MnaMicroservices(this, 'MeenaMicroservices', {
+    const microservices = new MnaMicroservices(this, 'Microservices', {
       // props
+    });
+
+    const apigateway = new MnaApiGateway(this, 'ApiGateway', {
+      discussionMicroservice: microservices.discussionMicroservice,
     });
   }
 }
